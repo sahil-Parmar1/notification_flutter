@@ -1,16 +1,68 @@
-# test_notification
+# Flutter Local Notifications
 
-A new Flutter project.
+[![Flutter](https://img.shields.io/badge/Flutter-Local%20Notifications-blue)](https://pub.dev/packages/flutter_local_notifications)
 
-## Getting Started
+A powerful Flutter plugin for displaying local notifications on Android, iOS, and other platforms.
 
-This project is a starting point for a Flutter application.
+## Features
+- Schedule notifications
+- Show notifications with custom sound
+- Handle notification taps
+- Support for Android and iOS
+- Group notifications
 
-A few resources to get you started if this is your first Flutter project:
+## Installation
+Add the dependency to your `pubspec.yaml` file:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+```yaml
+dependencies:
+  flutter_local_notifications: ^16.1.0  # Use the latest version
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Run:
+```sh
+flutter pub get
+```
+
+## Usage
+
+### Import the package
+```dart
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+```
+
+### Initialize
+```dart
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+void initializeNotifications() async {
+  const AndroidInitializationSettings androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+  final InitializationSettings settings = InitializationSettings(android: androidSettings);
+  await flutterLocalNotificationsPlugin.initialize(settings);
+}
+```
+
+### Show a Notification
+```dart
+void showNotification() async {
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    'channel_id', 'channel_name',
+    importance: Importance.high,
+    priority: Priority.high,
+  );
+
+  const NotificationDetails details = NotificationDetails(android: androidDetails);
+  await flutterLocalNotificationsPlugin.show(0, 'Hello', 'This is a test notification', details);
+}
+```
+
+## Screenshot
+
+![Flutter Local Notifications Example](assets/screenshot.png)
+
+## Documentation
+For full documentation, check out the [official package](https://pub.dev/packages/flutter_local_notifications).
+
+## License
+This project is licensed under the MIT License.
+
